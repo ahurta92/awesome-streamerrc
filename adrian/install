@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
+
+rm -rf ~/.config/nvim/*
+
 mkdir -p ~/.config/nvim/plugin
 mkdir -p ~/.config/nvim/after/plugin
 mkdir -p ~/.config/nvim/lua
+mkdir -p ~/.config/nvim/lua/adrian
 
 # link wholesale
-for f in `find . -regex ".*\.vim$\|.*\lua$"`; do
-    rm -rf ~/.config/nvim/$f
+for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
+    echo ~/dotfiles/awesome-streamerrc/adrian/$f
     ln -s ~/dotfiles/awesome-streamerrc/adrian/$f ~/.config/nvim/$f
 done
 
