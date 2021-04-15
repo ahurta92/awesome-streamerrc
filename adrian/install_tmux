@@ -2,7 +2,7 @@
 
 
 # link wholesale
-for f in `find . -regex ".*/.tmux.conf.*"` do
+for f in `find . -regex ".*/.tmux.conf.*"`; do
     echo ~/dotfiles/awesome-streamerrc/adrian/$f
     ln -s ~/dotfiles/awesome-streamerrc/adrian/$f ~/$f
 done
