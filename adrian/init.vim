@@ -16,9 +16,9 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'majutsushi/tagbar'
 
 " Neovim Tree shitter
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"Plug 'nvim-treesitter/playground'
-"Plug 'nvim-treesitter/completion-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/completion-treesitter'
 
 " Debugger Plugins
 Plug 'puremourning/vimspector'
@@ -27,6 +27,8 @@ Plug 'szw/vim-maximizer'
 " THANKS BFREDL
 "Plug '/home/mpaulson/personal/contextprint.nvim'
 "Plug '/home/mpaulson/personal/af-pluth-pluth'
+"CSS colors
+Plug 'ap/vim-css-color'
 
 
 Plug 'tpope/vim-fugitive'
