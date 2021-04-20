@@ -65,6 +65,10 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'sbdchd/neoformat'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
+"Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 
 
 " Colors
@@ -74,7 +78,7 @@ call plug#end()
 " let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
 " lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
-
+let g:python3_host_prog=expand('/home/agh/anaconda3/envs/ML_Development/bin/python')
 let g:vim_be_good_log_file = 1
 let g:vim_apm_log = 1
 
@@ -146,6 +150,7 @@ augroup END
 autocmd BufWritePre *.cpp lua vim.lsp.buf.formatting_sync(nil,100)
 autocmd BufWritePre *.cc lua vim.lsp.buf.formatting_sync(nil,100)
 autocmd BufWritePre *.h lua vim.lsp.buf.formatting_sync(nil,100)
+autocmd BufWritePre *.py execute ':Black'
 
 
 augroup THE_PRIMEAGEN
