@@ -64,6 +64,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " prettier
 Plug 'sbdchd/neoformat'
 Plug 'ryanoasis/vim-devicons'
+Plug 'Yggdroot/indentLine'
 
 
 " Colors
