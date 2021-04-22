@@ -1,4 +1,1 @@
-require("theprimeagen.telescope")
-require("theprimeagen.harpoon")
-require("theprimeagen.lsp")
-
+/gpfs/home/ahurtado/dotfiles/awesome-streamerrc/ThePrimeagen/./lua/theprimeagen/init.lua

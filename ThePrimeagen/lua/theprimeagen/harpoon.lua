@@ -1,12 +1,1 @@
-require("harpoon").setup({
-    projects = {
-        ["/home/theprimeagen/work/tvui-automation"] = {
-            term = {
-                cmds = {
-                    "yarn test\n"
-                }
-            }
-        }
-    }
-}) 
-
+/gpfs/home/ahurtado/dotfiles/awesome-streamerrc/ThePrimeagen/./lua/theprimeagen/harpoon.lua

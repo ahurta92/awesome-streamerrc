@@ -1,6 +1,6 @@
--- require('telescope').setup({
-    -- https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
--- })
+require('telescope').setup({
+     https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
+})
 
 -- Its a library to simplify creating fuzzy finders.
 

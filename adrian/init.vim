@@ -65,7 +65,10 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'sbdchd/neoformat'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
-"Airline
+"Lua line
+Plug 'hoob3rt/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -78,7 +81,7 @@ call plug#end()
 " let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
 " lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
-let g:python3_host_prog=expand('/home/agh/anaconda3/envs/ML_Development/bin/python')
+let g:python3_host_prog=expand('/gpfs/projects/rjh/adrian/anaconda3/bin/python3')
 let g:vim_be_good_log_file = 1
 let g:vim_apm_log = 1
 

@@ -25,4 +25,6 @@ let s:candidate_airlinetheme = ['alduin', 'ayu_mirage', 'base16_flat',
 
 let s:idx = RandInt(0, len(s:candidate_airlinetheme)-1)
 let s:theme = s:candidate_airlinetheme[s:idx]
-let g:airline_theme=s:theme
+let g:airline_theme='zenburn'
+"let g:airline_theme=s:theme
+let g:airline#extensions#tagbline#enabled=1
