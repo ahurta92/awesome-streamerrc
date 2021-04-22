@@ -72,6 +72,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'chrisbra/csv.vim'
+
 
 
 " Colors
