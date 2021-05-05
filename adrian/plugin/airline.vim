@@ -24,7 +24,7 @@ let s:candidate_airlinetheme = ['alduin', 'ayu_mirage', 'base16_flat',
     \ 'luna', 'raven', 'seagull', 'solarized_flood', 'term', 'vice', 'zenburn']
 
 let s:idx = RandInt(0, len(s:candidate_airlinetheme)-1)
+let g:airline#extensions#tabline#enabled=1
 let s:theme = s:candidate_airlinetheme[s:idx]
-let g:airline_theme='zenburn'
+let g:airline_theme='gruvbox'
 "let g:airline_theme=s:theme
-let g:airline#extensions#tagbline#enabled=1

@@ -1,3 +1,14 @@
+set path+=**
+
+" Nice menu when typing `:find *.py`
+set wildmode=longest,list,full
+set wildmenu
+" Ignore files
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/.git/*
+
 call plug#begin('~/.vim/plugged')
 
 " Yes, I am a sneaky snek now
@@ -5,20 +16,24 @@ Plug 'ambv/black'
 
 " Plebvim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-
-Plug 'nvim-lua/completion-nvim'
 Plug 'hrsh7th/nvim-compe'
 
-Plug 'tjdevries/nlua.nvim'
-Plug 'tjdevries/lsp_extensions.nvim'
+" Plug 'nvim-lua/completion-nvim'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'glepnir/galaxyline.nvim'
+Plug 'simrat39/symbols-outline.nvim'
+
+
+"Plug 'tjdevries/nlua.nvim'
+"Plug 'tjdevries/lsp_extensions.nvim'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
 
 " Neovim Tree shitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-Plug 'nvim-treesitter/completion-treesitter'
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'nvim-treesitter/playground'
+"Plug 'nvim-treesitter/completion-treesitter'
 
 " Debugger Plugins
 Plug 'puremourning/vimspector'
@@ -47,6 +62,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'colepeters/spacemacs-theme.vim'
 
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
@@ -59,6 +75,9 @@ Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug '/home/mpaulson/personal/VimDeathmatch/client'
+" HARPOON !!
+Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/git-worktree.nvim'
 
 
 " prettier
@@ -66,13 +85,20 @@ Plug 'sbdchd/neoformat'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 "Lua line
-Plug 'hoob3rt/lualine.nvim'
+"Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'mkitt/tabline.vim'
 Plug 'chrisbra/csv.vim'
+" Which Key
+Plug 'folke/which-key.nvim'
+" Vista
+Plug 'liuchengxu/vista.vim'
+
+
+
 
 
 
@@ -80,12 +106,12 @@ Plug 'chrisbra/csv.vim'
 
 call plug#end()
 
-" let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
-" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
+" let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
+"lua require("lua/adrian")
+"lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 let g:python3_host_prog=expand('/gpfs/projects/rjh/adrian/anaconda3/bin/python3')
-let g:vim_be_good_log_file = 1
-let g:vim_apm_log = 1
 
 if executable('rg')
     let g:rg_derive_root='true'
@@ -108,7 +134,7 @@ nnoremap <Leader>cpu a%" PRIu64 "<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nnoremap <silent> <Leader>b :Vista nvim_lsp<CR>
 
 
 " greatest remap ever

@@ -1,6 +1,12 @@
+local function on_attach()
+end
+
+
 local lspconfig = require('lspconfig')
 require'lspconfig'.ccls.setup{on_attach=require'compe'.on_attach}
 require'lspconfig'.pyls.setup{}
+
+
 local on_attach = require'compe'.on_attach
 
 
@@ -23,3 +29,7 @@ lspconfig.ccls.setup {
 }
 
 
+local opts={
+	show_guides=true,
+}
+require('symbols-outline').setup(opts)
