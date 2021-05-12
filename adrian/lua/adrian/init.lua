@@ -9,6 +9,7 @@ require("adrian.git-worktree")
 -- require('colorbuddy').colorscheme('gruvbuddy')
 -- require("adrian.nordic")
 require("adrian.compe-config")
+require("adrian.saga")
 --require("adrian.lua-line")
 --require("adrian.options")
 

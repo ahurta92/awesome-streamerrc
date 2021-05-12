@@ -1,3 +1,17 @@
+set path+=**
+
+" Nice menu when typing `:find *.py`
+set wildmode=longest,list,full
+set wildmenu
+" Ignore files
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/android/*
+set wildignore+=**/ios/*
+set wildignore+=**/.git/*
+
 call plug#begin('~/.vim/plugged')
 
 " Yes, I am a sneaky snek now
@@ -5,9 +19,12 @@ Plug 'ambv/black'
 
 " Plebvim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'tjdevries/nlua.nvim'
-Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'hrsh7th/nvim-compe'
+" Plug 'nvim-lua/completion-nvim'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'simrat39/symbols-outline.nvim'
+" Plug 'tjdevries/nlua.nvim'
+" Plug 'tjdevries/lsp_extensions.nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -19,7 +36,6 @@ Plug 'szw/vim-maximizer'
 
 " THANKS BFREDL
 Plug '/home/mpaulson/personal/contextprint.nvim'
-Plug '/home/mpaulson/personal/af-pluth-pluth'
 
 Plug 'rust-lang/rust.vim'
 Plug 'tweekmonster/gofmt.vim'
@@ -27,76 +43,37 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
-Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'theprimeagen/vim-be-good'
-Plug '/home/theprimeagen/personal/af-pluth-pluth'
 Plug 'gruvbox-community/gruvbox'
-Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-projectionist'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug '/home/theprimeagen/personal/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
-"  TOOOOOOOOOOOOO
-
-Plug 'colepeters/spacemacs-theme.vim'
-Plug 'sainnhe/gruvbox-material'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 " HARPOON!!
-Plug '/home/theprimeagen/personal/harpoon'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
 
 " prettier
 Plug 'sbdchd/neoformat'
 
+" should I try another status bar???
+"  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+" Plug 'hoob3rt/lualine.nvim'
+
 call plug#end()
+
+" Adding local modules
+let &runtimepath.=',/home/theprimeagen/personal/harpoon/master'
+let &runtimepath.=',/home/theprimeagen/personal/vim-with-me/ui'
+let &runtimepath.=',/home/theprimeagen/personal/git-worktree.nvim/master'
 
 " let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
@@ -113,8 +90,8 @@ endif
 let loaded_matchparen = 1
 let mapleader = " "
 
+nnoremap <silent> <C-f> :lua require("harpoon.term").sendCommand(1, "tmux2\n"); require("harpoon.term").gotoTerminal(1)<CR>
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :Ex<CR>
@@ -126,6 +103,8 @@ nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kk
 nnoremap <Leader>cpu a%" PRIu64 "<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+nnoremap <leader>gt <Plug>PlenaryTestFile
 
 " greatest remap ever
 vnoremap <leader>p "_dP

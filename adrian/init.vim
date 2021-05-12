@@ -22,6 +22,7 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+" Learning
 
 
 "Plug 'tjdevries/nlua.nvim'
@@ -78,6 +79,10 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " HARPOON !!
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/git-worktree.nvim'
+
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 
 " prettier
@@ -178,10 +183,23 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
-autocmd BufWritePre *.cpp lua vim.lsp.buf.formatting_sync(nil,100)
+autocmd BufWritePre *.cpp AutoFormatBuffer clang-format
+augroup c
+autocmd!
+autocmd FileType c,cpp,h,hpp,glsl call MakeRun()
+augroup end
+
+function! MakeRun()
+nnoremap :terminal make -j8 && make run
+inoremap :terminal make -j8 && make run
+endfunction
 autocmd BufWritePre *.cc lua vim.lsp.buf.formatting_sync(nil,100)
 autocmd BufWritePre *.h lua vim.lsp.buf.formatting_sync(nil,100)
 autocmd BufWritePre *.py execute ':Black'
+"-- lsp provider to find the cursor word definition and reference
+"noremap <silent> vh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+"-- or use command LspSagaFinder
+nnoremap <silent> vh :Lspsaga lsp_finder<CR>
 
 
 augroup THE_PRIMEAGEN
