@@ -4,15 +4,15 @@ set number
 set nohlsearch
 set hidden
 set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set noexpandtab
 set smartindent
 set nu
 set nowrap
 set noswapfile
 set nobackup
-set undodir=~/.vim/undodir
+set undodir=/gpfs/scratch/ahurtado/undodir
 set undofile
 set incsearch
 set termguicolors
@@ -32,4 +32,4 @@ set updatetime=50
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-set colorcolumn=80
+set colorcolumn=120

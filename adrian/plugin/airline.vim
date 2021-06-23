@@ -26,5 +26,5 @@ let s:candidate_airlinetheme = ['alduin', 'ayu_mirage', 'base16_flat',
 let s:idx = RandInt(0, len(s:candidate_airlinetheme)-1)
 let g:airline#extensions#tabline#enabled=1
 let s:theme = s:candidate_airlinetheme[s:idx]
-let g:airline_theme='gruvbox'
+let g:airline_theme='dracula'
 "let g:airline_theme=s:theme

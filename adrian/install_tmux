@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-
+rm ~/.tmux.conf
+rm ~/.tmux.conf.local
 # link wholesale
 for f in `find . -regex ".*/.tmux.conf.*"`; do
     echo ~/dotfiles/awesome-streamerrc/adrian/$f

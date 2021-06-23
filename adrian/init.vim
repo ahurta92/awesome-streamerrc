@@ -16,13 +16,31 @@ Plug 'ambv/black'
 
 " Plebvim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'nvim-lua/lsp-status.nvim'
+  Plug 'nvim-lua/diagnostic-nvim'
+  Plug 'sbdchd/neoformat'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'hrsh7th/nvim-compe'
+Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
+" Markdown setup
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" tabular plugin is used to format tables
+Plug 'godlygeek/tabular'
+" JSON front matter highlight plugin
+Plug 'elzr/vim-json'
+Plug 'plasticboy/vim-markdown'
+
 
 " Plug 'nvim-lua/completion-nvim'
-Plug 'glepnir/lspsaga.nvim'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'airblade/vim-gitgutter'
 " Learning
+Plug 'vim-pandoc/vim-pandoc-syntax'
+" if you don't have node and yarn, use pre build
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 
 
 "Plug 'tjdevries/nlua.nvim'
@@ -49,12 +67,16 @@ Plug 'ap/vim-css-color'
 
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'gruvbox-community/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-projectionist'
 
 
@@ -64,6 +86,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'colepeters/spacemacs-theme.vim'
+Plug 'lewis6991/gitsigns.nvim'
 
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
@@ -79,6 +102,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " HARPOON !!
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/git-worktree.nvim'
+
 
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
@@ -98,9 +122,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'mkitt/tabline.vim'
 Plug 'chrisbra/csv.vim'
 " Which Key
-Plug 'folke/which-key.nvim'
-" Vista
-Plug 'liuchengxu/vista.vim'
+"Plug 'folke/which-key.nvim'
 
 
 
@@ -139,8 +161,7 @@ nnoremap <Leader>cpu a%" PRIu64 "<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-nnoremap <silent> <Leader>b :Vista nvim_lsp<CR>
-
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 " greatest remap ever
 vnoremap <leader>p "_dP
@@ -156,11 +177,14 @@ vnoremap <leader>d "_d
 
 
 " vim TODO
-nmap <Leader>tu <Plug>BujoChecknormal
-nmap <Leader>th <Plug>BujoAddnormal
-let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
+nmap <C-S> <Plug>BujoAddnormal
+imap <C-S> <Plug>BujoAddinsert
+nmap <C-Q> <Plug>BujoChecknormal
+imap <C-Q> <Plug>BujoCheckinsert
 
-nnoremap <Leader>ww ofunction wait(ms: number): Promise<void> {<CR>return new Promise(res => setTimeout(res, ms));<CR>}<esc>k=i{<CR>
+
+let g:cujo#todo_file_path = $HOME . "/.cache/bujo"
+
 
 inoremap <C-c> <esc>
 
@@ -173,33 +197,58 @@ endfun
 
 " ES
 com! W w
-
-nmap <leader>nn :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
-autocmd BufWritePre *.cpp AutoFormatBuffer clang-format
-augroup c
-autocmd!
-autocmd FileType c,cpp,h,hpp,glsl call MakeRun()
-augroup end
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END
 
-function! MakeRun()
-nnoremap :terminal make -j8 && make run
-inoremap :terminal make -j8 && make run
-endfunction
+
+
 autocmd BufWritePre *.cc lua vim.lsp.buf.formatting_sync(nil,100)
 autocmd BufWritePre *.h lua vim.lsp.buf.formatting_sync(nil,100)
 autocmd BufWritePre *.py execute ':Black'
 "-- lsp provider to find the cursor word definition and reference
 "noremap <silent> vh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 "-- or use command LspSagaFinder
-nnoremap <silent> vh :Lspsaga lsp_finder<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+" disable header folding
+let g:vim_markdown_folding_disabled = 1
+
+" do not use conceal feature, the implementation is not so good
+let g:vim_markdown_conceal = 0
+
+" disable math tex conceal feature
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
+
+" support front matter of various format
+let g:vim_markdown_frontmatter = 1  " for YAML format
+let g:vim_markdown_toml_frontmatter = 1  " for TOML format
+let g:vim_markdown_json_frontmatter = 1  " for JSON format
+
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
+
+" do not close the preview tab when switching to other buffers
+let g:mkdp_auto_close = 0
+nnoremap <M-m> :MarkdownPreview<CR>
+
 
 
 augroup THE_PRIMEAGEN
